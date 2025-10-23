@@ -172,9 +172,17 @@ REST_FRAMEWORK = {
 
 # JWT configeration
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
 # dj-rest-auth configeration
 SITE_ID = 1
+
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "access",  # optional (for cookie storage)
+    "JWT_AUTH_REFRESH_COOKIE": "refresh",  # optional
+    "JWT_AUTH_HTTPONLY": False,  # needed for testing in Postman
+    "OLD_PASSWORD_FIELD_ENABLED": True,  # Enable old password field for password change
+}
