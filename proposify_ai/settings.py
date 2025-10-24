@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'phonenumber_field',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
     # ...,
     'django.contrib.sites',
     'allauth',
@@ -166,9 +168,12 @@ CORS_ALLOWED_ORIGINS = [
 
 # Rest framework configeration
 REST_FRAMEWORK = {
+    # Add JWT authentication configeration
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-    )
+    ),
+    # Add drf-spectacular configeration
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
@@ -212,3 +217,24 @@ EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
 # Note: Send email we need frontend url.
 FRONTEND_URL = env.str("FRONTEND_URL")
+
+# drf-spectacular configeration
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Proposify-ai API',
+    'DESCRIPTION': 'API documentation for my proposify-ai project.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False, # Exclude schema from Swagger UI
+    # If using JWT authentication (e.g., djangorestframework-simplejwt)
+    'SERVE_PERMISSIONS': ['rest_framework.permissions.AllowAny'],
+    'COMPONENT_SPLIT_REQUEST': True,
+    'SECURITY': [
+        {'BearerAuth': []},
+    ],
+    'SECURITY_SCHEMES': {
+        'BearerAuth': {
+            'type': 'http',
+            'scheme': 'bearer',
+            'bearerFormat': 'JWT',
+        },
+    },
+}
