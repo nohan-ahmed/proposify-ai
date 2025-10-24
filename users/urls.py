@@ -8,6 +8,7 @@ app_name = "users"
 # Custom auth-related routes
 auth_patterns = [
     path("registration/", views.CustomRegisterView.as_view(), name="custom_register"),
+    path("verify-email/<uid>/<token>/", views.CustomVerifyEmailView.as_view(), name="custom_verify_email"),
 ]
 
 

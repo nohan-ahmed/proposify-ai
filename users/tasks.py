@@ -22,7 +22,7 @@ def send_verification_email(self, user_id):
         uid = urlsafe_base64_encode(force_bytes(user.pk))
 
         # Build verification link
-        verification_link = f"{getattr(settings, 'FRONTEND_URL', 'http://localhost:3000')}/verify-email/{uid}/{token}/"
+        verification_link = f"{getattr(settings, 'FRONTEND_URL', 'http://localhost:3000')}/api/users/verify-email/{uid}/{token}/"
         
         # Render the HTML template with context
         message = render_to_string(
