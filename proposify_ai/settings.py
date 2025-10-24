@@ -98,7 +98,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'proposify_ai.wsgi.application'
+ASGI_APPLICATION = 'proposify_ai.asgi.application'
+# WSGI_APPLICATION = 'proposify_ai.wsgi.application'
 
 
 # Database
@@ -186,3 +187,18 @@ REST_AUTH = {
     "JWT_AUTH_HTTPONLY": False,  # needed for testing in Postman
     "OLD_PASSWORD_FIELD_ENABLED": True,  # Enable old password field for password change
 }
+
+# Redis Channel Layer configeration
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
+
+# Celery & Redis Configuration Options
+CELERY_BROKER_URL = 'redis://redis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
