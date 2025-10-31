@@ -2,14 +2,22 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import smart_str
 from django.utils.http import urlsafe_base64_decode
 
+# rest_framework imports
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+
+# allauth imports
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from dj_rest_auth.registration.views import SocialLoginView
+
 # Local imports
 from . import models
 from  . import serializers
 from . import tasks
+
+
 # Create your views here.
 
 
@@ -45,4 +53,8 @@ class CustomVerifyEmailView(APIView):
             return Response({'message': 'Email verified successfully.'}, status=status.HTTP_200_OK)
         else:
             return Response({'message': 'Invalid verification link.'}, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+# Social Login Views here.
+class GoogleLogin(SocialLoginView): # if you want to use Implicit Grant, use this
+    adapter_class = GoogleOAuth2Adapter

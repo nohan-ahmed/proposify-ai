@@ -60,8 +60,10 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
     'dj_rest_auth.registration',
+    # ...,
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     # add local apps
     'jobs',
     'users',

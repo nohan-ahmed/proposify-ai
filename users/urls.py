@@ -8,6 +8,7 @@ auth_patterns = [
     path("registration/", views.CustomRegisterView.as_view(), name="custom_register"),
     path("verify-email/<uid>/<token>/", views.CustomVerifyEmailView.as_view(), name="custom_verify_email"),
     path('password/reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('google/', views.GoogleLogin.as_view(), name='google_login')
 ]
 
 
