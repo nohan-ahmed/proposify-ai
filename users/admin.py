@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from . import models
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -61,3 +62,32 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('username', 'email', 'password1', 'password2', 'is_staff', 'is_active')
         }),
     )
+
+
+
+@admin.register(models.UserSkill)
+class UserSkillAdmin(admin.ModelAdmin):
+    list_display = ('id','user', 'skill', 'level', 'logo_preview', 'created_at', 'updated_at')
+    list_filter = ('level', 'created_at', 'updated_at')
+    search_fields = ('user__username', 'skill', 'description')
+    ordering = ('skill',)
+    readonly_fields = ('created_at', 'updated_at', 'logo_preview')
+    prepopulated_fields = {'slug': ('skill',)}
+
+    fieldsets = (
+        ("User & Skill Info", {
+            'fields': ('user', 'skill', 'level', 'slug')
+        }),
+        ("Details", {
+            'fields': ('description', 'logo', 'logo_preview')
+        }),
+        ("Timestamps", {
+            'fields': ('created_at', 'updated_at'),
+        }),
+    )
+
+    def logo_preview(self, obj):
+        if obj.logo:
+            return format_html('<img src="{}" style="height:40px; border-radius:6px;" />', obj.logo.url)
+        return "—"
+    logo_preview.short_description = "Logo Preview"

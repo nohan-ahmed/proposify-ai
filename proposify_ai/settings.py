@@ -65,8 +65,9 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     # add local apps
-    'jobs',
     'users',
+    'core',
+    'jobs',
     'payments',
 
 ]

@@ -2,9 +2,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django_countries.fields import CountryField
+from django.utils.text import slugify
 # Local imports
 from .managers import CustomUserManager
-
+from core.choices import LevelChoices
 # Create your models here.
 
 class User(AbstractUser):
@@ -31,3 +32,27 @@ class User(AbstractUser):
     
     def __str__(self):
         return self.username
+    
+class UserSkill(models.Model):
+    user = models.ForeignKey(to=User, related_name='user_skills', on_delete=models.CASCADE)
+    logo = models.ImageField(upload_to='skill_logos', blank=True, null=True)
+    skill = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
+    level = models.CharField(max_length=100, choices=LevelChoices.choices, default=LevelChoices.BEGINNER)
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        unique_together = ('user', 'skill')
+        ordering = ['skill']
+
+    def save(self, *args, **kwargs):
+        # Automatically generate slug from skill name and user ID if not provided
+        if not self.slug:
+            base_slug = slugify(self.skill)
+            self.slug = f"{base_slug}-{self.user.id}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.skill} ({self.level})"
