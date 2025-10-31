@@ -55,3 +55,21 @@ class UserSkill(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.skill} ({self.level})"
+
+class UserExperience(models.Model):
+    user = models.ForeignKey(to=User, related_name='user_experiences', on_delete=models.CASCADE)
+    company = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='company_logos', blank=True, null=True)
+    position = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+    currently_working = models.BooleanField(default=False) # Add a field to indicate if the experience is currently working.
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ['-start_date']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.company} ({self.position})"

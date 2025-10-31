@@ -91,3 +91,30 @@ class UserSkillAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="height:40px; border-radius:6px;" />', obj.logo.url)
         return "—"
     logo_preview.short_description = "Logo Preview"
+
+
+@admin.register(models.UserExperience)
+class UserExperienceAdmin(admin.ModelAdmin):
+    list_display = ('id','user', 'company', 'position', 'start_date', 'end_date', 'currently_working',)
+    list_filter = ('start_date', 'end_date', 'currently_working', 'created_at', 'updated_at')
+    search_fields = ('user__username', 'company', 'position', 'description')
+    ordering = ('-start_date',)
+    readonly_fields = ('created_at', 'updated_at', 'logo_preview')
+
+    fieldsets = (
+        ("User & Experience Info", {
+            'fields': ('user', 'company', 'position', 'start_date', 'end_date', 'currently_working')
+        }),
+        ("Details", {
+            'fields': ('description', 'logo', 'logo_preview')
+        }),
+        ("Timestamps", {
+            'fields': ('created_at', 'updated_at'),
+        }),
+    )
+
+    def logo_preview(self, obj):
+        if obj.logo:
+            return format_html('<img src="{}" style="height:40px; border-radius:6px;" />', obj.logo.url)
+        return "—"
+    logo_preview.short_description = "Logo Preview"
