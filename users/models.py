@@ -73,3 +73,21 @@ class UserExperience(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.company} ({self.position})"
+
+class UserEducation(models.Model):
+    user = models.ForeignKey(to=User, related_name='user_educations', on_delete=models.CASCADE)
+    institute_name = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='school_logos', blank=True, null=True)
+    degree = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+    currently_studying = models.BooleanField(default=False) # Add a field to indicate if the education is currently studying.
+    description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-start_date']
+
+    def __str__(self):
+        return f"{self.user.username} - {self.institute_name} ({self.degree})"

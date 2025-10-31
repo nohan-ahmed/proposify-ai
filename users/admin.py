@@ -118,3 +118,30 @@ class UserExperienceAdmin(admin.ModelAdmin):
             return format_html('<img src="{}" style="height:40px; border-radius:6px;" />', obj.logo.url)
         return "—"
     logo_preview.short_description = "Logo Preview"
+    
+
+@admin.register(models.UserEducation)
+class UserEducationAdmin(admin.ModelAdmin):
+    list_display = ('id','user', 'institute_name', 'degree', 'start_date', 'end_date', 'currently_studying',)
+    list_filter = ('start_date', 'end_date', 'currently_studying', 'created_at', 'updated_at')
+    search_fields = ('user__username', 'institute_name', 'degree', 'description')
+    ordering = ('-start_date',)
+    readonly_fields = ('created_at', 'updated_at', 'logo_preview')
+
+    fieldsets = (
+        ("User & Education Info", {
+            'fields': ('user', 'institute_name', 'degree', 'start_date', 'end_date', 'currently_studying')
+        }),
+        ("Details", {
+            'fields': ('description', 'logo', 'logo_preview')
+        }),
+        ("Timestamps", {
+            'fields': ('created_at', 'updated_at'),
+        }),
+    )
+
+    def logo_preview(self, obj):
+        if obj.logo:
+            return format_html('<img src="{}" style="height:40px; border-radius:6px;" />', obj.logo.url)
+        return "—"
+    logo_preview.short_description = "Logo Preview"
