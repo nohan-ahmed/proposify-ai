@@ -37,3 +37,10 @@ class CustomRegisterSerializer(serializers.ModelSerializer):
         # Create the user.
         user = models.User.objects.create_user(**validated_data)
         return user
+    
+# UserSkill serializer here
+class UserSkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserSkill
+        fields = '__all__'
+        read_only_fields = ('id', 'user', 'slug', 'created_at', 'updated_at')

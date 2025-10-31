@@ -7,6 +7,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 # allauth imports
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
@@ -16,7 +18,7 @@ from dj_rest_auth.registration.views import SocialLoginView
 from . import models
 from  . import serializers
 from . import tasks
-
+from core.permissions import IsOwnerOrReadOnly
 
 # Create your views here.
 
@@ -58,3 +60,20 @@ class CustomVerifyEmailView(APIView):
 # Social Login Views here.
 class GoogleLogin(SocialLoginView): # if you want to use Implicit Grant, use this
     adapter_class = GoogleOAuth2Adapter
+    
+
+
+# UserSkill views here
+
+class UserSkillViewSet(ModelViewSet):
+    queryset = models.UserSkill.objects.all()
+    serializer_class = serializers.UserSkillSerializer
+    permission_classes = [IsAuthenticated]
+    
+    # Override the get_queryset method to filter by user ID automatically
+    def get_queryset(self):
+        return models.UserSkill.objects.filter(user=self.request.user)
+    
+    # Override the perform_create method to set the user field automatically
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
