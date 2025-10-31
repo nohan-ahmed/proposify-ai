@@ -64,7 +64,6 @@ class GoogleLogin(SocialLoginView): # if you want to use Implicit Grant, use thi
 
 
 # UserSkill views here
-
 class UserSkillViewSet(ModelViewSet):
     queryset = models.UserSkill.objects.all()
     serializer_class = serializers.UserSkillSerializer
@@ -73,6 +72,20 @@ class UserSkillViewSet(ModelViewSet):
     # Override the get_queryset method to filter by user ID automatically
     def get_queryset(self):
         return models.UserSkill.objects.filter(user=self.request.user)
+    
+    # Override the perform_create method to set the user field automatically
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        
+# UserExperience views here.
+class UserExperienceViewSet(ModelViewSet):
+    queryset = models.UserExperience.objects.all()
+    serializer_class = serializers.UserExperienceSerializer
+    permission_classes = [IsAuthenticated]
+    
+    # Override the get_queryset method to filter by user ID automatically
+    def get_queryset(self):
+        return models.UserExperience.objects.filter(user=self.request.user)
     
     # Override the perform_create method to set the user field automatically
     def perform_create(self, serializer):

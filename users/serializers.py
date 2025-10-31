@@ -44,3 +44,10 @@ class UserSkillSerializer(serializers.ModelSerializer):
         model = models.UserSkill
         fields = '__all__'
         read_only_fields = ('id', 'user', 'slug', 'created_at', 'updated_at')
+        
+# UserExperience serializer here
+class UserExperienceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserExperience
+        fields = '__all__'
+        read_only_fields = ('id', 'user', 'created_at', 'updated_at')

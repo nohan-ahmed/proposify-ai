@@ -16,6 +16,9 @@ auth_patterns = [
 skill_router = DefaultRouter()
 skill_router.register(r'user-skills', views.UserSkillViewSet, basename='user-skill')
 
+# Router for UserExperience ViewSet
+experience_router = DefaultRouter()
+experience_router.register(r'user-experiences', views.UserExperienceViewSet, basename='user-experience')
 
 # URL patterns
 urlpatterns = [
@@ -27,4 +30,6 @@ urlpatterns = [
     path("", include("dj_rest_auth.registration.urls")),
     # # include UserSkill routes
     path("", include(skill_router.urls)),
+    # include UserExperience routes
+    path("", include(experience_router.urls)),
 ]
