@@ -1,20 +1,19 @@
 from django.urls import path, include
-
+from dj_rest_auth.views import PasswordResetConfirmView
 from . import views
 
-
-app_name = "users"
 
 # Custom auth-related routes
 auth_patterns = [
     path("registration/", views.CustomRegisterView.as_view(), name="custom_register"),
     path("verify-email/<uid>/<token>/", views.CustomVerifyEmailView.as_view(), name="custom_verify_email"),
+    path('password/reset/confirm/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
 ]
 
 
 urlpatterns = [
     # include custom auth patterns
-    path("", include((auth_patterns))),
+    path("", include(auth_patterns)),
     # include default dj-rest-auth patterns
     path("", include("dj_rest_auth.urls")),
     # include default dj-rest-auth registration patterns
