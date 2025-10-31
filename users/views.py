@@ -90,3 +90,17 @@ class UserExperienceViewSet(ModelViewSet):
     # Override the perform_create method to set the user field automatically
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        
+# UserEducation views here.
+class UserEducationViewSet(ModelViewSet):
+    queryset = models.UserEducation.objects.all()
+    serializer_class = serializers.UserEducationSerializer
+    permission_classes = [IsAuthenticated]
+    
+    # Override the get_queryset method to filter by user ID automatically
+    def get_queryset(self):
+        return models.UserEducation.objects.filter(user=self.request.user)
+    
+    # Override the perform_create method to set the user field automatically
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)

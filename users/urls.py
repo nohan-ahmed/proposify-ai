@@ -20,6 +20,10 @@ skill_router.register(r'user-skills', views.UserSkillViewSet, basename='user-ski
 experience_router = DefaultRouter()
 experience_router.register(r'user-experiences', views.UserExperienceViewSet, basename='user-experience')
 
+# Router for UserEducation ViewSet
+education_router = DefaultRouter()
+education_router.register(r'user-educations', views.UserEducationViewSet, basename='user-education')
+
 # URL patterns
 urlpatterns = [
     # include custom auth patterns
@@ -32,4 +36,6 @@ urlpatterns = [
     path("", include(skill_router.urls)),
     # include UserExperience routes
     path("", include(experience_router.urls)),
+    # include UserEducation routes
+    path("", include(education_router.urls))
 ]

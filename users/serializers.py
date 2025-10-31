@@ -51,3 +51,10 @@ class UserExperienceSerializer(serializers.ModelSerializer):
         model = models.UserExperience
         fields = '__all__'
         read_only_fields = ('id', 'user', 'created_at', 'updated_at')
+        
+# UserEducation serializer here
+class UserEducationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.UserEducation
+        fields = '__all__'
+        read_only_fields = ('id', 'user', 'created_at', 'updated_at')
