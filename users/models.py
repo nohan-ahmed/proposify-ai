@@ -91,3 +91,4 @@ class UserEducation(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.institute_name} ({self.degree})"
+    

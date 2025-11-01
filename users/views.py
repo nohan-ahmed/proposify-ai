@@ -9,7 +9,7 @@ from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.throttling import UserRateThrottle, ScopedRateThrottle
 # allauth imports
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from dj_rest_auth.registration.views import SocialLoginView
@@ -24,6 +24,9 @@ from core.permissions import IsOwnerOrReadOnly
 
 
 class CustomRegisterView(APIView):
+    permission_classes = [AllowAny]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
     def post(self, request, format=None):
         serializer = serializers.CustomRegisterSerializer(data=request.data)
         if serializer.is_valid():
@@ -38,7 +41,9 @@ class CustomRegisterView(APIView):
 
 
 class CustomVerifyEmailView(APIView):
-
+    permission_classes = [AllowAny]
+    throttle_classes = [ScopedRateThrottle]
+    throttle_scope = 'auth'
     def get(self, request, uid, token):
         try:
             # 1st decode the uid
@@ -68,6 +73,7 @@ class UserSkillViewSet(ModelViewSet):
     queryset = models.UserSkill.objects.all()
     serializer_class = serializers.UserSkillSerializer
     permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle]
     
     # Override the get_queryset method to filter by user ID automatically
     def get_queryset(self):
@@ -82,7 +88,8 @@ class UserExperienceViewSet(ModelViewSet):
     queryset = models.UserExperience.objects.all()
     serializer_class = serializers.UserExperienceSerializer
     permission_classes = [IsAuthenticated]
-    
+    throttle_classes = [UserRateThrottle]
+
     # Override the get_queryset method to filter by user ID automatically
     def get_queryset(self):
         return models.UserExperience.objects.filter(user=self.request.user)
@@ -96,6 +103,7 @@ class UserEducationViewSet(ModelViewSet):
     queryset = models.UserEducation.objects.all()
     serializer_class = serializers.UserEducationSerializer
     permission_classes = [IsAuthenticated]
+    throttle_classes = [UserRateThrottle]
     
     # Override the get_queryset method to filter by user ID automatically
     def get_queryset(self):
