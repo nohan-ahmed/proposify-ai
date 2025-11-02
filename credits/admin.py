@@ -18,8 +18,8 @@ class PlanAdmin(admin.ModelAdmin):
 
 @admin.register(UserCredit)
 class UserCreditAdmin(admin.ModelAdmin):
-    list_display = ('id', 'user', 'credits', 'reserved_credits', 'created_at', 'updated_at')
-    list_filter = ('credits', 'reserved_credits')
+    list_display = ('id', 'user', 'credits', 'reserved_credits', 'is_active', 'created_at', 'updated_at')
+    list_filter = ('credits', 'reserved_credits', 'is_active')
     search_fields = ('user__username', 'user__email')
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)

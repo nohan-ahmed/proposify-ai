@@ -32,9 +32,10 @@ class Plan(models.Model):
     
 
 class UserCredit(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, related_name='user_credits')
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, related_name='user_credits')
     credits = models.PositiveIntegerField(default=0)
     reserved_credits = models.PositiveIntegerField(default=0)
+    is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
