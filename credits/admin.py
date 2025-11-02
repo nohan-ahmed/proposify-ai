@@ -7,6 +7,7 @@ from .forms import PlanAdminForm
 class PlanAdmin(admin.ModelAdmin):
     form = PlanAdminForm
     list_display = ('id', 'name', 'regular_price', 'discount_price', 'created_at', 'updated_at')
+    prepopulated_fields = {'slug': ('name',)}
     list_filter = ('regular_price', 'discount_price')
     search_fields = ('name', 'description')
     date_hierarchy = 'created_at'
