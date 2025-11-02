@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'jobs',
     'payments',
     'credits',
+    'llm_models',
 
 ]
 
