@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'core',
     'jobs',
     'payments',
+    'credits',
 
 ]
 
