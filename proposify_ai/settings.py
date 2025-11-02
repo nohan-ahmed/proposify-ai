@@ -68,7 +68,7 @@ INSTALLED_APPS = [
     'users',
     'core',
     'jobs',
-    'payments',
+    'subsctiptions',
     'credits',
     'llm_models',
 
