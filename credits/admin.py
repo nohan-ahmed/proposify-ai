@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Plan
+from .models import Plan, UserCredit
 from .forms import PlanAdminForm
 # Register your models here.
 
@@ -13,3 +13,13 @@ class PlanAdmin(admin.ModelAdmin):
     date_hierarchy = 'created_at'
     ordering = ('-created_at',)
     
+    
+
+
+@admin.register(UserCredit)
+class UserCreditAdmin(admin.ModelAdmin):
+    list_display = ('id', 'user', 'credits', 'reserved_credits', 'created_at', 'updated_at')
+    list_filter = ('credits', 'reserved_credits')
+    search_fields = ('user__username', 'user__email')
+    date_hierarchy = 'created_at'
+    ordering = ('-created_at',)
