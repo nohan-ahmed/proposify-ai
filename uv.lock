@@ -706,6 +706,7 @@ dependencies = [
     { name = "drf-spectacular-sidecar" },
     { name = "environs" },
     { name = "pillow" },
+    { name = "stripe" },
     { name = "uvicorn" },
     { name = "whitenoise" },
 ]
@@ -727,6 +728,7 @@ requires-dist = [
     { name = "drf-spectacular-sidecar", specifier = ">=2025.10.1" },
     { name = "environs", specifier = ">=14.3.0" },
     { name = "pillow", specifier = ">=12.0.0" },
+    { name = "stripe", specifier = ">=13.1.1" },
     { name = "uvicorn", specifier = ">=0.38.0" },
     { name = "whitenoise", specifier = ">=6.11.0" },
 ]
@@ -930,6 +932,19 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/e5/40/edede8dd6977b0d3da179a342c198ed100dd2aba4be081861ee5911e4da4/sqlparse-0.5.3.tar.gz", hash = "sha256:09f67787f56a0b16ecdbde1bfc7f5d9c3371ca683cfeaa8e6ff60b4807ec9272", size = 84999, upload-time = "2024-12-10T12:05:30.728Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a9/5c/bfd6bd0bf979426d405cc6e71eceb8701b148b16c21d2dc3c261efc61c7b/sqlparse-0.5.3-py3-none-any.whl", hash = "sha256:cf2196ed3418f3ba5de6af7e82c694a9fbdbfecccdfc72e281548517081f16ca", size = 44415, upload-time = "2024-12-10T12:05:27.824Z" },
+]
+
+[[package]]
+name = "stripe"
+version = "13.1.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+    { name = "typing-extensions" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/12/a0/3d13718648b8d93140ac649f70202aeb7bfc12516626d308d6fec73a5503/stripe-13.1.1.tar.gz", hash = "sha256:62141a5a2ede69c35e0f257a77acc3fa9cec6e8a30131a49f001bd90fda7a681", size = 1357445, upload-time = "2025-10-31T20:10:49.789Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/03/c9/6a968b6e3da48224f4f473884566ef660560e4f90072f14261a347987b1b/stripe-13.1.1-py3-none-any.whl", hash = "sha256:2a74981ba559f6e518e657b808c6339a397c3862f3e5dd10ec7603c3829addba", size = 1961719, upload-time = "2025-10-31T20:10:47.603Z" },
 ]
 
 [[package]]

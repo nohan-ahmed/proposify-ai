@@ -14,5 +14,5 @@ class PaymentMethod(models.TextChoices):
 
 class PaymentStatus(models.TextChoices):
     PENDING = "pending", "Pending"
-    COMPLETED = "completed", "Completed"
+    SUCSSESS = "success", "Success"
     FAILED = "failed", "Failed"

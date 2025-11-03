@@ -20,6 +20,7 @@ dependencies = [
     "drf-spectacular-sidecar>=2025.10.1",
     "environs>=14.3.0",
     "pillow>=12.0.0",
+    "stripe>=13.1.1",
     "uvicorn>=0.38.0",
     "whitenoise>=6.11.0",
 ]

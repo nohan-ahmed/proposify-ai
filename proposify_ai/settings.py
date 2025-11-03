@@ -249,3 +249,8 @@ SPECTACULAR_SETTINGS = {
         },
     },
 }
+
+
+# Stripe settings
+STRIPE_SECRET_KEY = env.str("STRIPE_SECRET_KEY")
+STRIPE_WEBHOOK_SECRET = env.str("STRIPE_WEBHOOK_SECRET")
