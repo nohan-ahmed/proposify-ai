@@ -27,6 +27,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('users.urls'), name='users'),
     path('api/credits/', include('credits.urls'), name='credits'),
+    path('api/subscriptions/', include('subsctiptions.urls'), name='subscriptions'),
+    
     
     # Schema generation endpoint
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
