@@ -15,6 +15,3 @@ class JobViewSet(ModelViewSet):
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user).order_by("-queued_at")
     
-    
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user, attempts=1)

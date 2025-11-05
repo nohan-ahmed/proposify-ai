@@ -45,7 +45,7 @@ class Proposal(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="proposals")
 
     title = models.CharField(max_length=255, null=True, blank=True)
-    job_post = models.TextField()
+    prompt = models.TextField()
     language = models.CharField(max_length=10, default="en")
 
     tone = models.CharField(max_length=20, choices=ToneChoices.choices)
