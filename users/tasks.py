@@ -9,7 +9,7 @@ from celery.exceptions import Retry
 import logging
 # import local 
 from users.models import User
-
+from credits.models import UserCredit
 logger = logging.getLogger(__name__)
 
 @shared_task(bind=True, max_retries=3, default_retry_delay=60)
@@ -50,4 +50,18 @@ def send_verification_email(self, user_id):
         return
     except Exception as e:
         logger.error(f"Failed to send verification email to user {user_id}: {e}")
+        raise self.retry(exc=e)
+    
+
+@shared_task(bind=True, max_retries=3, default_retry_delay=60)
+def create_user_credits_task(self, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+        UserCredit.objects.create(user=user)
+        logger.info(f"UserCredit created successfully for user {user_id}")
+    except User.DoesNotExist:
+        logger.error(f"User {user_id} not found")
+        return
+    except Exception as e:
+        logger.error(f"Failed to create UserCredit for user {user_id}: {e}")
         raise self.retry(exc=e)
