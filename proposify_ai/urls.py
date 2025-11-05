@@ -28,8 +28,9 @@ urlpatterns = [
     path('api/users/', include('users.urls'), name='users'),
     path('api/credits/', include('credits.urls'), name='credits'),
     path('api/subscriptions/', include('subsctiptions.urls'), name='subscriptions'),
+    path('api/jobs/', include('jobs.urls'), name='jobs'),
     
-    
+        
     # Schema generation endpoint
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Swagger UI

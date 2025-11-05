@@ -10,6 +10,20 @@ class JobAdmin(admin.ModelAdmin):
     search_fields = ("id", "user__username", "user__email")
     ordering = ("-queued_at",)
     readonly_fields = ("queued_at", "started_at", "finished_at")
+    fieldsets = (
+        (None, {
+            "fields": ("user", "job_type", "status", "queued_at", "started_at", "finished_at")
+        }),
+        ("Result", {
+            "fields": ("result_meta", "error", "attempts")
+        }),
+        ("LLM", {
+            "fields": ("llm",)
+        }),
+        ("User Prompt", {
+            "fields": ("user_prompt",)
+        }),
+    )
     
 
 @admin.register(models.Proposal)

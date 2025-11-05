@@ -19,7 +19,7 @@ class Job(models.Model):
 
     status = models.CharField(max_length=20, choices=JobStatus.choices, default=JobStatus.QUEUED)
 
-    input = models.JSONField()  # e.g. { job_post, tone, language }
+    user_prompt = models.JSONField()  # e.g. { job_prompt, tone, language }
     result_meta = models.JSONField(null=True, blank=True)
 
     attempts = models.PositiveIntegerField(default=0)
@@ -37,7 +37,7 @@ class Job(models.Model):
         ]
 
     def __str__(self):
-        return f"Job({self.type}) - {self.status}"
+        return f"Job({self.job_type}) - {self.status}"
 
 
 class Proposal(models.Model):
