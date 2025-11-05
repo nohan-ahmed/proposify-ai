@@ -74,8 +74,8 @@ class CreateSubsctiptionWithStripeView(APIView):
                 ],
                 mode="payment",
                 metadata={"subscription_id": subscription.id},
-                success_url=f"http://127.0.0.1:5500//success?session_id={{CHECKOUT_SESSION_ID}}",
-                cancel_url=f"http://127.0.0.1:5500/cancel",
+                success_url=f"{settings.STRIPE_SUCCESS_URL}?session_id={checkout_session.id}",
+                cancel_url=f"{settings.STRIPE_CANCEL_URL}?session_id={checkout_session.id}",
             )
             # Return the session ID and the checkout URL to the client
             return Response({"id": checkout_session.id, "url": checkout_session.url})
