@@ -177,6 +177,8 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
+    # Add pagination configeration
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.StandardResultsSetPagination',
     # Add drf-spectacular configeration
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     
