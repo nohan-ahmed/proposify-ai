@@ -15,3 +15,22 @@ class JobViewSet(ModelViewSet):
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user).order_by("-queued_at")
     
+
+class ProposalViewSet(ModelViewSet):
+    queryset = models.Proposal.objects.all()
+    serializer_class = serializers.ProposalSerializer
+    permission_classes = [IsOwner]
+    throttle_classes = [UserRateThrottle]
+    
+    def perform_create(self, serializer):
+        #  Create Job
+        job = models.Job.objects.create(
+            user=self.request.user,
+            llm=serializer.validated_data.get("llm"),
+            job_type="proposal_generation",
+            user_prompt=serializer.validated_data.get("prompt"),
+            status="queued"
+        )
+        
+        # Create empty Proposal linked to Job
+        proposal = serializer.save(user=self.request.user, job=job)

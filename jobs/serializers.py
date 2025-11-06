@@ -12,3 +12,6 @@ class ProposalSerializer(serializers.ModelSerializer):
         model = models.Proposal
         fields = '__all__'
         read_only_fields = ['id', 'user', 'job', 'generated_text', 'tokens_prompt', 'tokens_completion', 'tokens_total', 'is_paid', 'created_at', 'updated_at']
+        extra_kwargs = {
+                'llm': {'required': True}
+            }

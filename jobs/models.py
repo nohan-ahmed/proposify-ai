@@ -37,13 +37,14 @@ class Job(models.Model):
         ]
 
     def __str__(self):
-        return f"Job({self.job_type}) - {self.status}"
+        return f"Job ID: {self.id} - ({self.job_type}) - Status: {self.status}"
 
 
 class Proposal(models.Model):
     job = models.ForeignKey(Job, on_delete=models.SET_NULL, null=True, related_name="proposal")
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="proposals")
-
+    llm = models.ForeignKey(LLM, on_delete=models.SET_NULL, null=True)
+    
     title = models.CharField(max_length=255, null=True, blank=True)
     prompt = models.TextField()
     language = models.CharField(max_length=10, default="en")
