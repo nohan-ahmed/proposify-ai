@@ -19,6 +19,7 @@ dependencies = [
     "drf-spectacular>=0.28.0",
     "drf-spectacular-sidecar>=2025.10.1",
     "environs>=14.3.0",
+    "huggingface-hub>=1.1.2",
     "pillow>=12.0.0",
     "stripe>=13.1.1",
     "uvicorn>=0.38.0",

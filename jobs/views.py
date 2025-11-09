@@ -3,7 +3,12 @@ from rest_framework.throttling import UserRateThrottle
 from . import models
 from . import serializers
 from core.permissions import IsOwner
+from . import prompts
+from . import tasks
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 # Create your views here.
 
 class JobViewSet(ModelViewSet):
@@ -34,3 +39,7 @@ class ProposalViewSet(ModelViewSet):
         
         # Create empty Proposal linked to Job
         proposal = serializer.save(user=self.request.user, job=job)
+        # Trigger async task to process the proposal
+        tasks.process_proposal_async.delay(proposal.id)
+        
+        
