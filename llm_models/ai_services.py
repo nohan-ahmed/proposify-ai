@@ -21,5 +21,5 @@ def run_huggingface_model(model_name: str, prompt: str, max_new_tokens: int = 40
         "tokens_prompt": result.usage.prompt_tokens,
         "tokens_completion": result.usage.completion_tokens,
         "tokens_total": result.usage.total_tokens,
-        "cost": 0.0
+        "cost": 1
     }
