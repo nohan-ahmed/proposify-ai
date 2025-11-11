@@ -5,5 +5,5 @@ class ProviderChoices(models.TextChoices):
     OPENAI = "openai", "OpenAI"
     HUGGINGFACE = "huggingface", "HuggingFace"
     GEMINI = "gemini", "Gemini"
-    CLAUDE = "claud", "Claude"
+    ANTHROPIC = "anthropic", "Anthropic"
     CUSTOM = "custom", "Custom"
