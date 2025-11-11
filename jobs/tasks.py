@@ -2,21 +2,20 @@ from celery import shared_task
 from django.utils import timezone
 from .models import Proposal, BillingLog
 from .prompts import generate_proposal_prompt
-from .hf_inference import run_model
+from llm_models.ai_services import run_huggingface_model
 
 @shared_task
 def process_proposal_async(proposal_id):
     proposal = Proposal.objects.get(id=proposal_id)
     job = proposal.job
-
     try:
         job.status = "running"
         job.started_at = timezone.now()
         job.save()
         
         system_prompt = generate_proposal_prompt(proposal)
-        ai_result = run_model(system_prompt)
-        
+        ai_result = run_huggingface_model(proposal.llm.provider_model, system_prompt)
+
         proposal.generated_text = ai_result["text"]
         proposal.tokens_prompt = ai_result["tokens_prompt"]
         proposal.tokens_completion = ai_result["tokens_completion"]
