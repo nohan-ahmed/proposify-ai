@@ -43,3 +43,12 @@ class ProposalViewSet(ModelViewSet):
         tasks.process_proposal_async.delay(proposal.id)
         
         
+        
+class BillingLogViewSet(ModelViewSet):
+    queryset = models.BillingLog.objects.all()
+    serializer_class = serializers.BillingLogSerializer
+    permission_classes = [IsOwner]
+    throttle_classes = [UserRateThrottle]
+
+    def get_queryset(self):
+        return self.queryset.filter(user=self.request.user).order_by("-created_at")

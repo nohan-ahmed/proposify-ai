@@ -15,3 +15,9 @@ class ProposalSerializer(serializers.ModelSerializer):
         extra_kwargs = {
                 'llm': {'required': True}
             }
+        
+class BillingLogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.BillingLog
+        fields = '__all__'
+        read_only_fields = ['id', 'user', 'proposal', 'created_at', 'updated_at']
