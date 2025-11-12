@@ -129,13 +129,13 @@ GEMINI_API_KEY=your_gemini_api_key_here
 ### 5. Database Setup
 ```bash
 # Run migrations
-uv run python manage.py migrate
+uv run manage.py migrate
 
 # Create superuser
-uv run python manage.py createsuperuser
+uv run manage.py createsuperuser
 
 # Collect static files
-uv run python manage.py collectstatic
+uv run manage.py collectstatic
 ```
 
 ### 6. Start Services
@@ -147,7 +147,7 @@ redis-server
 uv run celery -A proposify_ai worker --loglevel=info
 
 # Terminal 3: Start Django development server
-uv run python manage.py runserver
+uv run manage.py runserver
 # Terminal 4: Start Uvicorn for ASGI
 uv run uvicorn proposify_ai.asgi:application --reload
 ```
