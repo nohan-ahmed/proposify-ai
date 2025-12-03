@@ -74,10 +74,10 @@ class CreateSubsctiptionWithStripeView(APIView):
                 ],
                 mode="payment",
                 metadata={"subscription_id": subscription.id},
-                success_url=f"{settings.STRIPE_SUCCESS_URL}?session_id={checkout_session.id}",
-                cancel_url=f"{settings.STRIPE_CANCEL_URL}?session_id={checkout_session.id}",
+                success_url=f"{settings.STRIPE_SUCCESS_URL}",
+                cancel_url=f"{settings.STRIPE_CANCEL_URL}",
             )
-            # Return the session ID and the checkout URL to the client
+            # Return the session ID and the checkout URL to the client            
             return Response({"id": checkout_session.id, "url": checkout_session.url})
         except Exception as e:
             return Response({"error": str(e)}, status=400)
