@@ -40,10 +40,6 @@ USER django
 EXPOSE 8000
 
 # Default command
-CMD ["uv", "run", "gunicorn", "proposify_ai.wsgi:application", \
-     "--bind", "0.0.0.0:8000", \
-     "--workers", "4", \
-     "--worker-class", "sync", \
-     "--max-requests", "1000", \
-     "--timeout", "30", \
-     "--keep-alive", "2"]
+CMD ["uv", "run", "uvicorn", "proposify_ai.asgi:application", \
+     "--host", "0.0.0.0", "--port", "8000", \
+     "--workers", "4"]
