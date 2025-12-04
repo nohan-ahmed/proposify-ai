@@ -70,3 +70,6 @@ supervisor.log
 *.pem
 *.key
 *.crt
+celerybeat-schedule
+celerybeat-schedule-shm
+celerybeat-schedule-wal

@@ -22,6 +22,7 @@ dependencies = [
     "huggingface-hub>=1.1.2",
     "pillow>=12.0.0",
     "psycopg2>=2.9.11",
+    "psycopg2-binary>=2.9.11",
     "stripe>=13.1.1",
     "uvicorn>=0.38.0",
     "whitenoise>=6.11.0",

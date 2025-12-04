@@ -1,0 +1,27 @@
+**/__pycache__
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.Python
+.git
+.gitignore
+# .env
+# .env.*
+# .venv
+.pytest_cache
+.coverage
+node_modules
+.DS_Store
+*.log
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+.idea/
+.vscode/
+*.swp
+*.swo
+Dockerfile*
+docker-compose*
+nginx.conf
+README.md
