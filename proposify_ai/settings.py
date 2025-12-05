@@ -33,13 +33,21 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
+# ----------------------------------------------------------------------
+# ALLOWED HOSTS
+# ----------------------------------------------------------------------
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['localhost', '127.0.0.1'])
 
 
+# ----------------------------------------------------------------------
 # custom user model config
+# ----------------------------------------------------------------------
 AUTH_USER_MODEL = 'users.User'
 
+
+# ----------------------------------------------------------------------
 # Application definition
+# ----------------------------------------------------------------------
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -182,15 +190,23 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ----------------------------------------------------------------------
 # CORS configeration
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-]
+# ----------------------------------------------------------------------
 
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "http://localhost:8000",
+#     "http://127.0.0.1:8000",
+# ]
+
+CORS_ALLOWED_ORIGINS = env.list("CORS_ALLOWED_ORIGINS", default=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:8000", "http://127.0.0.1:8000"])
+
+# ----------------------------------------------------------------------
 # Rest framework configeration
+# ----------------------------------------------------------------------
+
 REST_FRAMEWORK = {
     # Add JWT authentication configeration
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -208,14 +224,19 @@ REST_FRAMEWORK = {
     },
 }
 
-
+# ----------------------------------------------------------------------
 # JWT configeration
+# ----------------------------------------------------------------------
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
+# ----------------------------------------------------------------------
 # dj-rest-auth configeration
+# ----------------------------------------------------------------------
+
 SITE_ID = 1
 
 REST_AUTH = {
@@ -226,7 +247,10 @@ REST_AUTH = {
     "OLD_PASSWORD_FIELD_ENABLED": True,  # Enable old password field for password change
 }
 
+# ----------------------------------------------------------------------
 # Redis Channel Layer configeration
+# ----------------------------------------------------------------------
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -236,11 +260,17 @@ CHANNEL_LAYERS = {
     },
 }
 
+# ----------------------------------------------------------------------
 # Celery & Redis Configuration Options
+# ----------------------------------------------------------------------
+
 CELERY_BROKER_URL = env.str("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = env.str("CELERY_RESULT_BACKEND")
 
+# ----------------------------------------------------------------------
 # Configure Django SMTP server.
+# ----------------------------------------------------------------------
+
 EMAIL_BACKEND = env.str("EMAIL_BACKEND")
 EMAIL_HOST = env.str("EMAIL_HOST")
 EMAIL_PORT = env.int("EMAIL_PORT")
@@ -250,7 +280,10 @@ EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
 # Note: Send email we need frontend url.
 FRONTEND_URL = env.str("FRONTEND_URL")
 
+# ----------------------------------------------------------------------
 # drf-spectacular configeration
+# ----------------------------------------------------------------------
+
 SPECTACULAR_SETTINGS = {
     'TITLE': 'Proposify-ai API',
     'DESCRIPTION': 'API documentation for my proposify-ai project.',
@@ -271,12 +304,17 @@ SPECTACULAR_SETTINGS = {
     },
 }
 
-
+# ----------------------------------------------------------------------
 # Stripe settings
+# ----------------------------------------------------------------------
+
 STRIPE_SECRET_KEY = env.str("STRIPE_SECRET_KEY")
 STRIPE_WEBHOOK_SECRET = env.str("STRIPE_WEBHOOK_SECRET")
 STRIPE_SUCCESS_URL = env.str("STRIPE_SUCCESS_URL")
 STRIPE_CANCEL_URL = env.str("STRIPE_CANCEL_URL")
 
+# ----------------------------------------------------------------------
 # Huggingface API Token
+# ----------------------------------------------------------------------
+
 HUGGINGFACE_TOKEN=env.str("HUGGINGFACE_TOKEN")
